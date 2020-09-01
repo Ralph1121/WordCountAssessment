@@ -32,21 +32,36 @@ import sys
 
 def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
-    # Your code here
-    return
+    result_dict = {}
+    with open(filename) as f:
+        word_list = f.read().lower().split()
+        for word in word_list:
+            if word not in result_dict:
+                result_dict[word] = 1
+            else:
+                result_dict[word] += 1
+    return result_dict
 
 
 def print_words(filename):
     """Prints one per line '<word> : <count>', sorted
     by word for the given file.
     """
-    # Your code here
+    d = create_word_dict(filename)
+    for k, v in sorted(d.items()):
+        print(k, ':', v)
     return
+
+
+def take_second(elem):
+    return elem[1]
 
 
 def print_top(filename):
     """Prints the top count listing for the given file."""
-    # Your code here
+    d = create_word_dict(filename)
+    for k, v in sorted(d.items(), key=take_second, reverse=true)[:20]:
+        print(v, ':', k)
     return
 
 
